@@ -50,7 +50,7 @@
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/your-username/nutriplan.git
+    git clone https://github.com/ana147219/NutriPlan---Your-Personal-Nutrition-Tracker.git
     ```
 
 2. **Set up the virtual environment**:
