@@ -1,0 +1,18 @@
+.image-container {
+    display: flex;
+    align-items: center;
+    height: 103px;
+    width: 100%;
+}
+
+.my-image {
+    width: 15%;
+    height: auto;
+}
+.description {
+    height: 100%;
+    width: 85%;
+    text-align: left;
+    padding-right: 10px;
+    padding-left: 10px;
+}

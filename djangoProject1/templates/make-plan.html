@@ -1,0 +1,162 @@
+
+{% extends "log-user-template.html" %}
+
+{% block title %}
+    Make Plan
+{% endblock %}
+
+{% block includes_header %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    {{ plan_days|json_script:"myData" }}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/make-plan.css' %}" />
+    <script type="module" src="{% static 'scripts/make_plan.js' %}"></script>
+    <script src="{% static 'scripts/drag-and-drop-touch.js' %}"></script>
+
+{% endblock %}
+
+
+{% block pop_up %}
+    <div class="alert hide" id="alert">
+       <i class="bx my-bx"></i>
+       <span class="msg"></span>
+       <div class="close-btn">
+          <i class="bx bx-x"></i>
+       </div>
+    </div>
+{% endblock %}
+
+{% block section %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="basic-container">
+                <div class="plan-tag-name">
+                    <div class="plan-name">
+                        <input type="text" required="" autocomplete="off" value="{{ plan.name }}" id="input-plan-name">
+                    </div>
+                    <div class="plan-tags">
+                        {% for tag in tags %}
+                            <input type="checkbox" class="btn-check bc" id="btn-check-{{ tag.id }}" autocomplete="off" name="{{ tag.id }}"
+                            {% if tag in plan.tags.all %}
+                            checked
+                            {% endif %}
+                            >
+                            <label class="btn my-btn-check tag" for="btn-check-{{ tag.id }}">{{ tag.name }}</label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+                <div class="col-md-12 col-lg-8" id="first-column">
+                    <div class="basic-container" id="days-div">
+                        <div id="days">
+                            {% for day in plan_days %}
+                            <button type="button" class="btn btn-primary day-button">{{ day }}</button>
+                            {% endfor %}
+                            <button id="addDay" type="button" class="btn btn-primary day-button">+</button>
+                        </div>
+                    </div>
+                    <div class="basic-container grid-container" id="timeline-div">
+                        <button id="left-button" class="timeline-button">&#10094;</button>
+                        <div class="food-timeline" id="timeline"></div>
+                        <button id="right-button" class="timeline-button">&#10095;</button>
+                    </div>
+                    <div class="basic-container" id="footer-div">
+                        <div class="footer-container">
+                            {% load static %}
+                            <img src="{% get_media_prefix %}icons8-trash-can-96.png" alt="" id="trash-can" ondragover="allowDrop(event)" draggable="false" />
+                            <h1 id="day-header">Day 1</h1>
+                            <div id="save-begin-btn">
+                                <button type="button" class="my-btn" id="save-button">Save</button>
+                                <button type="button" class="my-btn" id="begin-button">Begin</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4" id="second-column">
+                    <div class="basic-container" id="search-food-div">
+                        <section class="bg-light my-section">
+                            <div class="container pb-5 pt-5" id="search-food-container">
+                                <div class="gx-0 w-100 search-bar-div">
+                                    <div class="mb-3 parent-div" id="input-search">
+                                        <div class="form-box login">
+                                            <div class="input-box animation">
+                                                <input type="text" placeholder="" id="food-search-input" autocomplete="off">
+                                                <label>Food name</label><i class="bx bx-spreadsheet"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 text-end" id="button-search-div">
+                                        <button class="btn btn-danger p-2 rounded-pill search-button" aria-label="search" id="food-search-button-ajax">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" class="d-block h-auto">
+                                                <g>
+                                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                                    <path d="M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z"></path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <ul class="list-group my-list-group">
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="fr" id="fr" />
+                                            <label for="fr">Fruit</label>
+                                        </li>
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="vg" id="vg"/>
+                                            <label for="vg">Vegetables</label>
+                                        </li>
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="mt" id="mt"/>
+                                            <label for="mt">Meat</label>
+                                        </li>
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="cr" id="cr"/>
+                                            <label for="cr">Cereal</label>
+                                        </li>
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="fi" id="fi"/>
+                                            <label for="fi">Fish</label>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-group my-list-group">
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="ps" id="ps"/>
+                                            <label for="ps">Pastry</label>
+                                        </li>
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="ds" id="ds"/>
+                                            <label for="ds">Dishes</label>
+                                        </li>
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="nu" id="nu"/>
+                                            <label for="nu">Nuts</label>
+                                        </li>
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="sw" id="sw"/>
+                                            <label for="sw">Sweets</label>
+                                        </li>
+                                        <li class="list-group-item food-checkbox">
+                                            <input class="form-check-input me-1" type="checkbox" name="dr" id="dr"/>
+                                            <label for="dr">Drinks</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="w-100">
+                            <ul id="search-food" class="food-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% load static %}
+{% for hour, foods in day.items %}
+    <div class="food-time">
+    
+        <div class="info">
+            <div class="grid-background"></div>
+            <div class="img-div">
+                {% for food in foods %}
+                    <div class="one-img">
+                        <img src="{{ food.picture }}" data-id="{{ food.id }}">
+                        {% if food.status %}
+                            <img src="{% get_media_prefix %}icons8-check-96.png" class="checked-meal">
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="timeline-legend">
+            {{ hour|stringformat:"02d" }}:00
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,59 @@
+{% extends "basic_template.html" %}
+
+{% block title %}
+    NutriPlan
+{% endblock %}
+
+{% block includes_header %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/styles/start-page.css' %}" >
+{% endblock %}
+
+{% block page_body %}
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="flex-container">
+
+                <div class="flex-child pop-up">
+                    <div class="welcome-container">
+                        <center>
+                            <p class="head_name">
+                                <h1>Welcome to <p class="site_name">NutriPlan</p></h1>
+                            </p>
+                        </center>
+
+                        <br>
+                        <center>
+                            <p class="anchor_text">
+                                Find inspiration, motivation, and <br>
+                                resources to nurture your mind, body, and soul.
+                                <br>
+                                Let us help you create your diet plan and get in shape. <br>
+                                Click down below if you want to join us
+                                <br>and start your health journey today!
+                            </p>
+                        </center>
+
+                        <center>
+                            <a href="/login">
+                                <button type="button" class="btn" id="get_started_btn">Get Started</button>
+                            </a>
+                        </center>
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="flex-child bg-img">
+                  {% load static %}
+                  <img src="{% get_media_prefix %}bg.png" alt="">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

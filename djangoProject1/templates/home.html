@@ -1,0 +1,432 @@
+{% extends "log-user-template.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block includes_header %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    {% load static %}
+    <script src="{% static "scripts/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "scripts/infinite.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{ progress.progress|json_script:"myData" }}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/user.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/my-input.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/scroll.css' %}" />
+    <script src="{% static "scripts/user.js" %}"></script>
+    {#    <script src="{% static "scripts/form_popup.js" %}"></script>#}
+{% endblock %}
+
+{% block pop_up %}
+    <div class="alert hide" id="alert">
+        <i class="bx my-bx"></i>
+        <span class="msg"></span>
+        <div class="close-btn">
+            <i class="bx bx-x"></i>
+        </div>
+    </div>
+{% endblock %}
+
+{% block section %}
+    <script>
+        function validateForm() {
+            if ($('#usernameText').text() != '' || $('#confPassText').text().trim() != '') return false;
+            return true; // Allow form submission
+        }
+    </script>
+
+    <div class="modal__container" id="publish-modal-container">
+        <div class="modal__content">
+            <div class="modal__close close-modal" title="Close">
+                <i class="bx bx-x"></i>
+
+            </div>
+            <br>
+            <h3>Publish Plan</h3>
+            <hr>
+            <div class="make_plan_public">
+                <h6>Make Plan Public?</h6>
+
+                <div class="role-change">
+                    <label class="switch">
+                        <input type="checkbox" id="public">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+            </div>
+            <hr>
+            <div class="input-box mt-0" id="input_form_search">
+                <h6>Send to user</h6>
+                <br>
+                <input type="text" placeholder="User..." id="sending-username" autocomplete="off"/>
+            </div>
+            <br/>
+            <br/>
+
+            <div class="modal_confirm_btns">
+                <button class="modal__button-link btn bg-success" type="btn" id="send-plan-btn">Send</button>
+
+                <button class="modal__button-link close-modal btn bg-danger" type="btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal__container" id="delete-modal-container">
+        <div class="modal__content">
+            <br>
+
+            <h3>Delete Plan</h3>
+            <hr>
+            <br>
+
+            <div class="modal__close close-delete-modal" title="Close">
+                <i class="bx bx-x"></i>
+            </div>
+
+            <div class="make_plan_public">
+
+                <p>Are you sure that you want to delete this plan?</p>
+
+                <div class="modal_confirm_btns">
+                    <button class="modal__button-link send-form btn bg-success" id="delete-plan-btn">Yes</button>
+                    <button class="modal__button-link close-delete-modal btn bg-danger">No</button>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3 order-md-1 order-lg-1">
+            <div class="basic-container">
+
+
+                <center>
+                    <div class="upload">
+                        {% load static %}
+
+                        <img id="profile_pic_img" src="{% get_media_prefix %}{{ profile_pic }}" width="200px"
+                             height="200px" alt="" style="border-radius: 50%">
+
+                        <div class="round">
+                            <input type="file" id="upload_input">
+                            <i class="fa fa-camera" style="color: #fff;"></i>
+                        </div>
+                    </div>
+
+                </center>
+
+
+                <h6>Username: {{ user.username }}</h6>
+
+                <h6>Gender: {{ user.gender }}</h6>
+                <button type="button" class="collapsible my-btn" style="width: 70%">Change</button>
+                <div class="content w-100" id="my-content-data">
+                    <form action="change-data" method="post" onsubmit="return validateForm()">
+                        {% csrf_token %}
+                        <br>
+
+                        <div class="parent-div change-form">
+                            <div class="form-box login w-100">
+                                <div class="input-box animation">
+                                    <input type="text" name="username" id="username" autocomplete="off" placeholder=""/>
+                                    <label>Username</label><i class="bx bxs-user"></i>
+                                </div>
+                                <span class="error-message" style="color: red; font-size: 10px"
+                                      id="usernameText"></span>
+                                <div class="input-box animation">
+                                    <input type="password" name="password" id="password" autocomplete="off"
+                                           placeholder=""/>
+                                    <label>Password</label><i class="bx bxs-lock-alt"></i>
+                                </div>
+                                <div class="input-box animation">
+                                    <input type="password" name="confirm-password" id="confirm-password"
+                                           autocomplete="off" placeholder=""/>
+                                    <label>Confirm</label><i class="bx bxs-lock-alt"></i>
+                                </div>
+                                <span class="error-message" style="color: red; font-size: 10px"
+                                      id="confPassText"></span>
+                            </div>
+                        </div>
+                        <div class="role-change">
+                            <span class="toggle-display">Nutritionist</span>
+                            <label class="switch">
+                                <input type="checkbox" name="nutricionist" id="nutricionist" value="Nutricionist"
+                                        {% if is_nutricionist %}
+                                       checked
+                                        {% endif %} />
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <center>
+                            <button type="submit" class="my-btn" style="width: 70%">Save</button>
+                        </center>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+
+            function checkUsernameAvailability(username) {
+                $.get('/check_username/', {username: username}, function (data) {
+                    if (data.available) {
+                        $('#usernameText').text('');
+                    } else {
+                        $('#usernameText').text('This username already exists. Please choose a different one.');
+                    }
+                });
+            }
+
+            $('#username').on('input', function () {
+                var username = $(this).val();
+                checkUsernameAvailability(username);
+            });
+            $('#confirm-password').on('input', function () {
+                let password = $('#password').val();
+                let confirmPassword = $(this).val(); // Updated to use $(this) for consistency
+                if (password !== confirmPassword) {
+                    $('#confPassText').text('Confirmed password doesn`t match password! ');
+                } else {
+                    $('#confPassText').text('');
+                }
+            });
+            var form = document.querySelector('form');
+
+            // Add an event listener for the form submission event
+            /*form.addEventListener('submit', function(event) {
+                // Prevent the default form submission behavior
+                event.preventDefault();
+            
+                // Perform your form validation here
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                var confirmPassword = document.getElementById('confirm-password').value;
+                var nutricionist = document.getElementById('nutricionist').checked;
+            
+                
+                if ($('#usernameText').text() == '' && $('#confPassText').text().trim() == '')
+                {
+                    // If all validations pass, you can proceed with form submission using AJAX
+                    $.ajax({
+                        url: form.action,
+                        method: form.method,
+                        data: {
+                            username: username,
+                            password: password,
+                            'confirm-password': confirmPassword,
+                            nutricionist: nutricionist
+                        },
+                        success: function (response) {
+                            // Handle the success response from the server
+                            console.log('Form submitted successfully:', response);
+                            // Optionally, you can perform any additional actions (e.g., display a success message)
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle any errors that occur during the AJAX request
+                            console.error('Error:', error);
+                            // Optionally, you can display an error message to the user
+                        }
+                    });
+                }
+            });*/
+        </script>
+
+        <div class="col-sm-12 col-md-12 col-lg-6 order-md-3 order-lg-2">
+            <div class="basic-container">
+                <br/>
+                <h2>
+                    {% if user.following_plan %}
+                        {{ user.following_plan.name }}
+                    {% else %}
+                        Unknown
+                    {% endif %}
+                </h2>
+                <br/>
+                <div class="progress_div">
+                    <div class="wrapper-circle-progress">
+                        <div class="card">
+                            <div class="circle">
+                                <div class="bar"></div>
+                                <div class="box"><span></span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="food-values">
+                        <div class="horizontal-progress">
+                            <h6>Protein:</h6>
+                            <div class="progress nutri-progress" style="background-color: #ffc2b3;">
+                                <div
+                                        id="fat-progress"
+                                        class="progress-bar animation"
+                                        role="progressbar"
+                                        style="width: {{ progress.protein }}%; background-color: red"
+                                        aria-valuenow="25"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100">
+                                    {{ progress.protein|floatformat }}%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="horizontal-progress">
+                            <h6>Fat:</h6>
+                            <div class="progress nutri-progress" style="background-color: #ffdbb3">
+                                <div
+                                        id="carbs-progress"
+                                        class="progress-bar animation"
+                                        role="progressbar"
+                                        style="width: {{ progress.fat }}%; background-color: #ff8700"
+                                        aria-valuenow="25"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100">
+                                    {{ progress.fat|floatformat }}%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="horizontal-progress">
+                            <h6>Carbs:</h6>
+                            <div class="progress nutri-progress" style="background-color: #b3ffdf;">
+                                <div
+                                        id="protein-progress"
+                                        class="progress-bar animation"
+                                        role="progressbar"
+                                        style="width: {{ progress.carbs }}%; background-color: #0aff99"
+                                        aria-valuenow="25"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100">
+                                    {{ progress.carbs|floatformat }}%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="horizontal-progress">
+                            <h6>Fiber:</h6>
+                            <div class="progress nutri-progress" style="background-color: #b3faff;">
+                                <div
+                                        id="protein-progress"
+                                        class="progress-bar animation"
+                                        role="progressbar"
+                                        style="width: {{ progress.fiber }}%; background-color: #0aefff"
+                                        aria-valuenow="25"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100">
+                                    {{ progress.fiber|floatformat }}%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="horizontal-progress">
+                            <h6>Sugar:</h6>
+                            <div class="progress nutri-progress" style="background-color: #ebb3ff;">
+                                <div
+                                        id="protein-progress"
+                                        class="progress-bar animation"
+                                        role="progressbar"
+                                        style="width: {{ progress.sugar }}%; background-color: #be0aff"
+                                        aria-valuenow="25"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100">
+                                    {{ progress.sugar|floatformat }}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="basic-container">
+                <h2>My Plans</h2>
+                 {% if empty == 0 %}
+                    <h2 class="text-center mt-5">No Plans For Now</h2>
+                {% else %} 
+                
+             
+                <div class="plans-div infinite-container comments-wrp_modif">
+                    {% for plan in plans %}
+                        <div class="basic-container whole-plan my-whole-plan infinite-item">
+                            <div class="image-container">
+                                {% load static %}
+                                <img src="{% get_media_prefix %}icons8-list-view-96.png" class="my-image"/>
+                                <div class="description">
+                                    <span class="plan-badges">
+                                        {% if user.following_plan == plan %}
+                                            <span class="badge bg-danger">Current</span>
+                                        {% endif %}
+                                        {% if plan.owner == user %}
+                                            <span class="badge bg-info">Owner</span>
+                                        {% endif %}
+                                        {% if plan.is_public %}
+                                            <span class="badge bg-primary public-badge">Public</span>
+                                        {% endif %}
+                                    </span>
+                                    <a href="make_plan?plan_id={{ plan.id }}" class="plan-link">
+                                        <h3>{{ plan.name }}</h3>
+                                    </a>
+                                    {% for tag in plan.tags.all %}
+                                        <span class="key-word">{{ tag.name }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="card-body my-card-lay">
+                                    <div class="dropdown ms-auto">
+                                        <i class="bx bx-dots-vertical-rounded" data-bs-toggle="dropdown"
+                                           aria-expanded="false"></i>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <span class="dropdown-item window_trigger">
+                                                    <i class="bx bx-arrow-from-bottom"></i> Publish
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="dropdown-item delete-trigger">
+                                                    <i class="bx bxs-trash"></i> Delete
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+             {% endif %}
+             </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 order-md-2 order-lg-3">
+            <div class="basic-container">
+                <a href="/calendar-plan" class="w-100">
+                    <center>
+                        <button class="my-btn btn-green " style="width: 70%">Current</button>
+                    </center>
+
+                </a>
+                <br/>
+                <form action="make_plan" class="w-100" method="post">
+                    {% csrf_token %}
+                    <center>
+                        <button type="submit" class="my-btn btn-green" style="width: 70%">Make new plan</button>
+                    </center>
+
+                </form>
+            </div>
+            <div class="basic-container">
+                <div class="noti-header">
+                    <span class="noti-header-text">Notifications </span>
+                    {% load static %}
+                    <img src="{% get_media_prefix %}icons8-bell-96.png" alt="" class="my-image"/>
+                </div>
+                <div id="notifications-div">
+                    {% include "notifications.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

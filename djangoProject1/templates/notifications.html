@@ -1,0 +1,65 @@
+{% for key, noti in notifications.items %}
+    <button type="button" class="btn noti-button" data-bs-toggle="collapse" data-bs-target="#{{ key }}" name="{{ key }}"
+    {% if key in showed_notifications %}
+        class="btn noti-button" aria-expanded="true"
+    {% else %}
+        class="btn noti-button collapsed"
+    {% endif %}
+    >
+        <div class="w-75">
+            <div class="noti-button-u-content">
+                {% if noti.clasifier == "request" %}
+                    <span class="badge bg-info">Plan request</span>
+                    <span class="noti-username">{{ noti.username }}</span>
+                {% elif noti.clasifier == "meal" %}
+                    <span class="badge bg-warning">Meal time</span>
+                    <span class="noti-username">App</span>
+                {% elif noti.clasifier == "dismiss" %}
+                    <span class="badge bg-danger">Request dismissed</span>
+                    <span class="noti-username">{{ noti.username }}</span>
+                {% endif %}
+            </div>
+            <div class="noti-button-d-content">{{ noti.message }}</div>
+        </div>
+        <div class="w-25">
+            <img src="{{ noti.img }}" alt="" class="noti-button-img" />
+        </div>
+    </button>
+    <div id="{{ key }}"
+    {% if key in showed_notifications %}
+        class="collapse show"
+    {% else %}
+         class="collapse"
+    {% endif %}
+    >
+        <div class="noti-info-div">
+            {% if noti.clasifier == "request" %}
+                <p class="noti-info-text">
+                    A new form arrived from user, click on a form to check it or click a button to dismiss it
+                </p>
+                <div class="noti-info-buttons">
+                    <a href="/check-form?id_form={{ noti.id }}" style="width: 33%">
+                        <button class="btn btn-success w-100">check form</button>
+                    </a>
+                    <button class="btn btn-danger noti-dismiss-btn" name="{{ noti.id }}" style="width: 33%">dismiss form</button>
+                    <button class="btn btn-info noti-ignore-btn" name="{{ noti.id }}" style="width: 33%">ignore</button>
+                </div>
+            {% elif noti.clasifier == "dismiss" %}
+                <p class="noti-info-text">{{ noti.username }} has dismissed your plan request for form below form</p>
+                <div class="noti-info-buttons">
+                    <a href="/check-form?id_form={{ noti.id }}" class="w-50">
+                        <button class="btn btn-danger w-100" name="{{ noti.id }}" type="submit">form</button>
+                    </a>
+                    <button class="btn btn-info w-50 noti-ignore-btn" name="{{ noti.id }}">ignore</button>
+                </div>
+            {% elif noti.clasifier == "meal" %}
+                <div class="noti-reminder-info">
+                        <p class="noti-info-text">You have a meal scheduled at {{ noti.hour }} click on a food if u want to see it</p>
+                        <a href="/calendar-plan">
+                            <img src="{{ noti.img_pic }}" alt="" class="w-75"/>
+                        </a>
+                    </div>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,532 @@
+<!-- Tijana Gasic 0247/2021
+     Natasa Spasic 0310/2021 -->
+{% extends 'basic_template.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block includes_header %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "styles/login.css" %}">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    {% load static %}
+    <script src="{% static "scripts/login.js" %}"></script>
+    <script src="{% static "scripts/popup.js" %}"></script>
+{% endblock %}
+
+
+
+{% block page_body %}
+
+    <div class="alert hide" id="alert">
+       <i class="bx my-bx bxs-error-circle"></i>
+       <span class="msg"></span>
+       <div class="close-btn">
+          <i class="bx bx-x"></i>
+       </div>
+    </div>
+
+    <div class="wrapper">
+
+        <span class="bg-animate"></span>
+        <span class="bg-animate2"></span>
+        {% if messages %}
+            {% for message in messages %}
+                <script>
+                    $(document).ready(function() {
+                        showMessage("{{ message }}");
+                    });
+            </script>
+            {% endfor %}
+        {% endif %}
+        <div class="form-box login">
+
+            <h2 class="animation" style="--i:0;--j:21">Login</h2>
+            
+
+            <div  >
+                <form action="login" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="input-box animation"style="--i:1;--j:22">
+                        <input type="text" placeholder="" name="username" autocomplete="off"/>
+                        <label>Username</label>
+                        <i class='bx bxs-user'></i>
+                    </div>
+
+
+                    <div class="input-box animation" style="--i:2;--j:23">
+                        <input type="password" placeholder="" name="password" autocomplete="off"/>
+                        <label>Password</label>
+                        <i class='bx bxs-lock-alt' ></i>
+
+                    </div>
+
+                    <div class="forgot-pass-link animation" style="--i:3;--j:24">
+                        <p><a href="#" class="fp-link">Forgot Password?</a></p>
+                    </div>
+
+                    <button type="submit" class="my-btn animation" style="--i:4;--j:25"id="login_btn">Login</button>
+
+                </form>
+                <div class="logreg-link0 animation" style="--i:5;--j:26">
+                    <p>
+                        Don't have an account? <a href="#" class="register-link0">Sign Up</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+<!--
+
+    LOGO WILL BE HERE
+
+
+        <div class="info-text login">
+
+            <h2 class="animation" style="--i:0;--j:20">
+                Welcome Back!
+            </h2>
+
+            <p class="animation" style="--i:1;--j:21">
+                Lorem ipsum dolor sit amet consectetur adipisicing.
+            </p>
+
+        </div>
+-->
+
+        <form id="sigup-form">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <script src="{% static "scripts/popup.js" %}"></script>
+                {% endfor %}
+            {% endif %} 
+            <div class="form-box register">
+    
+    
+                <h2 class="animation" style="--i:17;--j:0">Sign Up <i class="bx bxs-pencil"></i></h2>
+    
+    
+                <div>
+    
+                    <div class="input-box animation" style="--i:18;--j:1">
+                       <p class="error-message" style="font-size: x-small; color: red" id="usernameText"></p>
+                        <input type="text" placeholder="" autocomplete="off" name="username" id="username" required>
+                        <label>Username</label>
+                        <i class='bx bxs-user'></i>
+                    </div>
+    
+    
+                    <div class="input-box animation" style="--i:19;--j:2">
+                        <p id="emailText" class="error-message" style="font-size: x-small; color: red" ></p>
+                        <input type="text" id="email" placeholder="" autocomplete="off" name="email"/>
+                        <label>Email</label>
+                        <i class='bx bxs-envelope' ></i>
+    
+                    </div>
+    
+    
+                    <div class="input-box animation" style="--i:20;--j:3">
+                        <input type="password" id="password" placeholder="" autocomplete="off" name="password" required/>
+                        <label>Password</label>
+                        <i class='bx bxs-lock-alt' ></i>
+    
+                    </div>
+    
+    
+                    <div class="input-box animation" style="--i:21;--j:4">
+                        <p id="confPassText" class="error-message" style="font-size: x-small; color: red" ></p>
+                        <input type="password" id="confirmpassword" placeholder="" autocomplete="off" name="confirmPassword" required/>
+                        <label>Confirm Password</label>
+                        <i class="bx bxs-lock-alt"></i>
+                    </div>
+    
+    
+                    <button type="button" class="my-btn animation next1" style="--i:22;--j:5">Next</button>
+                    
+    
+                    <div class="logreg-link1 animation" style="--i:23;--j:6">
+                        <p>
+                            Already have an account? <a href="#" class="login-link1">Login</a>
+                        </p>
+                    </div>
+    
+                </div>
+            </div>
+        <script>
+            function checkUsernameAvailability(username) {
+                $.get('/check_username/', {username: username}, function(data) {
+                    if (data.available) {
+                        $('#usernameText').text('');
+                    } else {
+                         $('#usernameText').text('This username already exists. Please choose a different one.');
+                    }
+                });
+            }
+            
+            // Function to check email availability
+            function checkEmailAvailability(email) {
+                $.get('/check_email/', {email: email}, function(data) {
+                    if (data.available) {
+                        $('#emailText').text('');
+                    } else {
+                         $('#emailText').text('This email is already associated with another account. Please use a different email address.');
+                    }
+                });
+            }
+            
+            // Attach event listeners to input fields
+            $('#username').on('input', function() {
+                var username = $(this).val();
+                checkUsernameAvailability(username);
+            });
+            
+            $('#email').on('input', function() {
+                var email = $(this).val();
+                checkEmailAvailability(email);
+            });
+            
+            $('#confirmpassword').on('input', function() {
+                let password = $('#password').val();
+                let confirmPassword = $(this).val(); // Updated to use $(this) for consistency
+                if (password !== confirmPassword) {
+                    $('#confPassText').text('Confirmed password doesn`t match password! ');
+                } else {
+                    $('#confPassText').text('');
+                }
+            });
+        </script>
+    
+    <!--
+            <div class="info-text register">
+                <h2 class="animation" style="--i:17;--j:0">
+                    Welcome Back!
+                </h2>
+                <p class="animation" style="--i:18;--j:1">
+                    Lorem ipsum dolor sit amet consectetur adipisicing.
+                </p>
+            </div>
+    
+    
+    -->
+    
+            <div class="form-box register2">
+    
+    
+                <h2 class="animation" style="--i:17;--j:0">Extra Info <i class="bx bx-line-chart" style="margin-bottom: 70px;"></i></h2>
+    
+    
+                <div>
+    
+                    <div class=" animation user_choice" style="--i:19;--j:2">
+                        <input type="radio" name="user_type" id="basic_user" value="basic_user" required checked/>
+    
+                        <label for="basic_user" style="color: #fff"><i class="bx bx-user"></i> User</label>
+    
+                        <input type="radio" name="user_type" style="margin-left: 20px"  id="nutri_user" value="nutri_user" required/>
+    
+                        <label for="nutri_user" style="color: #fff"><i class="bx bx-user-plus"></i> Nutritionist</label>
+    
+                        <br />
+    
+                        <br />
+    
+                    </div>
+    
+    
+                    <div class=" animation gender_choice" style="--i:20;--j:3">
+                        <input type="radio" name="gender" id="male" value="male" required checked/>
+                        <label for="male" style="color: #fff"><i class="bx bx-male-sign"></i></label>
+                        <input type="radio" name="gender" style="margin-left: 20px" id="female" value="female" required/>
+                        <label for="female" style="color: #fff"><i class="bx bx-female-sign"></i></label><br />
+    
+                    </div>
+    
+    
+    
+    
+                    <button type="submit" class="my-btn animation next2" style="--i:22;--j:5">Next</button>
+                    
+    
+                    <div class="logreg-link2 animation" style="--i:23;--j:6">
+                        <p>
+                            Already have an account? <a href="#" class="login-link2">Login</a>
+                        </p>
+                    </div>
+    
+                </div>
+            </div>
+        </form>
+    
+        <script>
+            $(document).on('submit', '#sigup-form', function (e) {
+                e.preventDefault();
+                let gender = $('input[name="gender"]:checked').val();
+                let userType = $('input[name="user_type"]:checked').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/signup',
+                    data: {
+                        username: $('#username').val(),
+                        email: $('#email').val(),
+                        password: $('#password').val(),
+                        confirmpassword: $('#confirmpassword').val(),
+                        gender: gender,
+                        userType: userType,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    }
+                })
+            })
+        </script>
+    
+    
+        <div class="form-box register3">
+
+
+            <h2 class="animation" style="--i:17;--j:0">Verification<i class="bx bx-check"></i></h2>
+
+
+            <div >
+                <form  id="verify-form">
+                     {% csrf_token %}
+                <div class="input-box animation" style="--i:18;--j:1">
+
+                    <input type="text" placeholder="" autocomplete="off" id="verification_code" name="verification_code"/>
+                    <label>Verification Code</label>
+                    <i class="bx bx-code-alt"></i>
+
+
+                </div>
+
+                <div class="resend-code-link animation" style="--i:19;--j:2">
+                    <p><a href="#" class="rc-link" id="reset-code-signup">Resend Code</a></p>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <script src="{% static "scripts/popup.js" %}"></script>
+                    {% endfor %}
+                {% endif %} 
+                
+                <button type="submit" class="my-btn animation next3" style="--i:20;--j:3" onclick="sign_up(event)">Sign Up</button>
+                </form>
+
+                <div class="logreg-link3 animation" style="--i:21;--j:4">
+                    <p>
+                        Already have an account? <a href="#" class="login-link3">Login</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        
+<script>
+    $(document).ready(function () {
+        $('#verify-form').submit(function (e) {
+            e.preventDefault(); // Prevent form submission
+            let verificationCode = $('#verification_code').val();
+            $.ajax({
+                type: 'POST',
+                url: '/verify',
+                data: {
+                    'username': $('#username').val(),
+                    'verification_code': verificationCode,
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = '/login'; 
+                    } else {
+                        
+                        $('.alert').addClass("show");
+                        $('.alert').removeClass("hide");
+                        $('.alert').removeClass("warning-col");
+                        $('.alert').addClass("showAlert");
+                        $('.msg').html("ERROR: False verification code!");
+                        $(".alert").addClass("error-col");
+                        
+                        setTimeout(function(){
+                          $('.alert').removeClass("show");
+                          $('.alert').addClass("hide");
+                        
+                        },5000);
+                    }
+                },
+                error: function () {
+                    // Handle AJAX error
+                    $('.error-message').text('An error occurred. Please try again later.');
+                }
+            });
+        });
+    });
+</script>
+
+
+        <form id="forgotPass-form">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <script src="{% static "scripts/popup.js" %}"></script>
+                {% endfor %}
+            {% endif %} 
+            <div class="form-box fp-reg">
+    
+    
+                <h2 class="animation" style="--i:17;--j:0">Forgot Password</h2>
+    
+    
+                <div >
+    
+                    <div class="input-box animation" style="--i:18;--j:1">
+                        <p id="emailText2" class="error-message" style="font-size: x-small; color: red" ></p>
+                        <input type="text" placeholder="" autocomplete="off" id="email2"/>
+                        <label>Email</label>
+                        <i class="bx bxs-envelope"></i>
+                    </div>
+    
+    
+                    <div class="input-box animation" style="--i:19;--j:2">
+    
+                        <input type="password" placeholder="" autocomplete="off" id="password2"/>
+                        <label>Password</label>
+                        <i class="bx bxs-lock-alt"></i>
+                    </div>
+    
+                    <div class="input-box animation" style="--i:20;--j:3">
+                        <p id="confPassText2" class="error-message" style="font-size: x-small; color: red" ></p>
+                        <input type="password" placeholder="" autocomplete="off" id="confirmpassword2"/>
+                        <label>Confirm Password</label>
+                        <i class="bx bxs-lock-alt"></i>
+                    </div>
+    
+    
+                    <button id="btn4" type="button" class="my-btn animation next4" style="--i:21;--j:4" >Next</button>
+    
+    
+                    <div class="logreg-link4 animation" style="--i:22;--j:5">
+                        <p>
+                            Already have an account? <a href="#" class="login-link4">Login</a>
+                        </p>
+                    </div>
+    
+                </div>
+            </div>
+        
+        <script>
+            // Function to check does user with this email exist
+            function checkEmailAvailabil(email) {
+                $.get('/check_email/', {email: email}, function(data) {
+                    if (data.available) {
+                        $('#emailText2').text('There is not a user with this email');
+                    } else {
+                         $('#emailText2').text('');
+                    }
+                });
+            }
+            
+            $('#email2').on('input', function() {
+                var email = $(this).val();
+                checkEmailAvailabil(email);
+            });
+            $('#confirmpassword2').on('input', function() {
+                let password = $('#password2').val();
+                let confirmPassword = $(this).val(); 
+                if (password !== confirmPassword) {
+                    $('#confPassText2').text('Confirmed password doesn`t match password! ');
+                } else {
+                    $('#confPassText2').text('');
+                }
+            });
+            
+        </script>
+
+
+        <div class="form-box fp-reg1">
+
+
+            <h2 class="animation" style="--i:17;--j:0">Verification<i class="bx bx-check"></i></h2>
+
+
+            <div >
+
+                <div class="input-box animation" style="--i:18;--j:1">
+
+                    <input type="text" placeholder=""autocomplete="off" id="verification-code2"/>
+                    <label>Verification Code</label>
+                    <i class="bx bx-code-alt"></i>
+
+
+                </div>
+
+                <div class="resend-code-link1 animation" style="--i:19;--j:2">
+                    <p><a href="#" class="rc-link1" id="reset-code-forgot-pass">Resend Code</a></p>
+                </div>
+
+
+                <button type="submit" class="my-btn animation next5" style="--i:20;--j:3" onclick="go_to_user_page(event)">Continue</button>
+
+
+                <div class="logreg-link5 animation" style="--i:21;--j:4">
+                    <p>
+                        Already have an account? <a href="#" class="login-link5">Login</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        </form>
+<script>
+    $(document).ready(function () {
+        $('#forgotPass-form').submit(function (e) {
+            e.preventDefault(); // Prevent form submission
+            let verificationCode = $('#verification-code2').val();
+            $.ajax({
+                type: 'POST',
+                url: '/change-password',
+                data: {
+                    'email': $('#email2').val(),
+                    'verification_code': verificationCode,
+                    'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                },
+                success: function (response) {
+                    if (response.success) {
+                        // Redirect to success page or perform any other action
+                        window.location.href = '/login';  // Replace '/success' with your success page URL
+                    } else {
+                        // Display error message
+                        //$('.error-message').text(response.message);
+                        
+                        $('.alert').addClass("show");
+                        $('.alert').removeClass("hide");
+                        $('.alert').removeClass("warning-col");
+                        $('.alert').addClass("showAlert");
+                        $('.msg').html("ERROR: False verification code!");
+                        $(".alert").addClass("error-col");
+                        
+                        setTimeout(function(){
+                          $('.alert').removeClass("show");
+                          $('.alert').addClass("hide");
+                        
+                        },5000);
+                    }
+                },
+                error: function () {
+                    // Handle AJAX error
+                    $('.error-message').text('An error occurred. Please try again later.');
+                }
+            });
+        });
+    });
+</script>
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,161 @@
+:root {
+    --navbar-links-color: #1abc9c;
+}
+
+.my-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 30px;
+    background-color: #081b29;
+    color: #1abc9c;
+    font-size: 20px;
+    border-radius: 0;
+}
+
+.img-container {
+    background-color: #d6eaf8;
+    border-radius: 70px;
+    width: 320px;
+    margin-left: 30px;
+}
+
+.nav-links {
+    padding-right: 30px;
+    margin-bottom: 0px;
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline-block;
+    padding: 0px 30px;
+}
+
+.navbar-link {
+    color: var(--navbar-links-color);
+    text-decoration: none;
+}
+
+.navbar-link:visited {
+    color: var(--navbar-links-color);
+    text-decoration: none;
+}
+
+.navbar-link:hover {
+    color: var(--navbar-links-color);
+    text-decoration: underline;
+}
+
+.navbar-link:active {
+    color: var(--navbar-links-color);
+    text-decoration: underline;
+}
+
+.logo {
+    cursor: pointer;
+    margin-right: auto;
+    padding-left: 30px;
+    height: 100px;
+    padding-top: 10px;
+    padding-bottom: 12px;
+}
+
+
+
+.logout{
+    background-color: #D6EAF8;
+    color: black;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 0;
+    padding-top: 4px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#logout-btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+
+@media screen and (max-width: 1030px) {    
+
+    .nav-links li {
+        padding: 10px 10px;
+        font-size: 18px;
+    }
+
+    .logout {
+        height: 37px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .nav-links li {
+        padding: 10px 2px;
+        font-size: 16px;
+    }
+
+    .img-container {
+        margin-left: 10px;
+        width: 200px;
+    }
+
+    .logo {
+        cursor: pointer;
+        margin-right: auto;
+        padding-left: 10px;
+        width: 90%;
+        height: auto;
+        padding-top: 10px;
+        padding-bottom: 12px;
+    }
+
+    .logout {
+        height: 30px;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .my-navbar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px 0px;
+    }
+
+    .img-container {
+        padding: 0px 7px;
+        margin-left: 0px;
+        width: 320px;       
+    }
+
+    .nav-links {
+        padding: 10px 5px;
+        text-align: center;               
+    }
+
+    .nav-links li {
+        padding: 10px 5px;
+        font-size: 16px;
+    }
+
+    .logout {
+        height: 30px;
+        width: 80px;
+    }
+
+    .logo {
+        cursor: pointer;
+        margin-right: auto;
+        padding-left: 30px;
+        height: 100px;
+        padding-top: 10px;
+        padding-bottom: 12px;
+    }
+}

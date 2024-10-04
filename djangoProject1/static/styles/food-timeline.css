@@ -1,0 +1,205 @@
+:root {
+    --gradient-color: linear-gradient(90deg, #7500f6, #007dff, #00aaff, #00cae9, #0fe3be);
+    --font-color: white;
+    --border-color: black;
+}
+
+.timeline-container {
+    display: flex;
+    flex-direction: row !important;
+    align-items: flex-end !important;
+}
+
+.food-time {
+    padding-left: 0px;
+    padding-right: 0px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-width: 10%;
+    max-width: 10%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: local;
+}
+
+.circle-border {
+    border-style: solid;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    vertical-align: middle;
+    padding-top: 0px;
+    margin-top: -10px;
+}
+
+.timeline-legend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--font-color);
+    border-top: none;
+    width: 100%;
+    margin-right: 0px;
+    cursor: pointer;
+    height: 60px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.food-timeline {
+    background-image: var(--gradient-color);
+    width: 95%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.food-timeline .info {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.food-time .info .img-div {
+    z-index: 2;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0 5% 20px;
+}
+
+.food-time .info .img-div .one-img {
+    position: relative;
+    height: 40%;
+    width: 100%;
+}
+
+.food-time .info .img-div .one-img img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.food-time .info .img-div .one-img .checked-meal {
+    width: 80%;
+    height: auto;
+    left: 10%;
+    pointer-events: none;
+}
+
+.food-time .info .img-div img:hover {
+    transform: scale(1.1);
+}
+
+.food-time .info.finished {
+    background-color: #1bd68226 !important;
+}
+
+.food-time .info.not-finished {
+    background-color: #f81c1c26 !important;
+}
+
+.grid-background {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    --scale: 100;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-rows: repeat(var(--scale), minmax(0, 1fr)) 1.4rem;
+    grid-column-gap: 5px;
+    --line-every: 25;
+    background-image: linear-gradient(to bottom, lightgrey 1px, transparent 1px);
+    background-size: 100% calc((100% - 1.4rem) / var(--scale) * var(--line-every));
+    border-left: 1px solid lightgrey;
+}
+
+.food-time-img {
+    font-size: 64px;
+    margin-bottom: 120px;
+    margin-top: 20px;
+    cursor: default;
+    user-select: none;
+    padding-bottom: 0px;
+    position: relative;
+}
+
+.overlay:hover {
+    transform: scale(1) !important;
+}
+
+.food-time-img:hover {
+    transform: scale(1.2);
+}
+
+.circle-border .doth {
+    width: 10%;
+    height: 10%;
+    padding-top: 0px;
+    margin-top: -1px;
+}
+
+.timeline-button {
+    font-size: 20px;
+    color: var(--font-color);
+    background-color: var(--gradient-color);
+    border-top: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    height: 60px;
+}
+#left-button {
+    background-color: #7500f6;
+}
+#right-button {
+    background-color: #0fe3be;
+}
+#food-image {
+    --size: 150px;
+    width: var(--size);
+    height: var(--size);
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .food-time {
+        min-width: 25%;
+        max-width: 25%;
+    }
+
+    .timeline-legend {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .food-timeline .info {
+        height: 200px;
+    }
+
+    .timeline-button {
+        height: 40px;
+        font-size: 14px;
+    }
+}

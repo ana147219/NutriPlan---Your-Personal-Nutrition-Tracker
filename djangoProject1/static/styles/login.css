@@ -1,0 +1,581 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+@import url('login_pop_ups.css');
+
+:root {
+    --color1: #e67e22;
+    --color2: #00B69A;
+    --color3: #f1c40f;
+    --color4_yt_background: #081b29;
+    --color5: #e74c3c;
+    --color6:#86A8E7;
+    --blackish: #17202a;
+    --gradient0:linear-gradient(to left top, #3bd16f, #00d0a3, #00ccce, #00c4ea, #00b9f4, #43b3f2, #5fadef, #75a7e9, #66a6ea, #53a6eb, #3aa5ec, #00a5ec);
+    --gradient1:linear-gradient(to right bottom, #3bd16f, #00d0a3, #00ccce, #00c4ea, #00b9f4, #43b3f2, #5fadef, #75a7e9, #66a6ea, #53a6eb, #3aa5ec, #00a5ec);
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden !important;
+}
+
+
+
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #ebf5fb;
+
+}
+
+.wrapper{
+    position: relative;
+    width: 850px;
+    height: 600px;
+    /*background: transparent;*/
+
+
+    border: 2px solid #fff; 
+    overflow: hidden;
+    /*box-shadow: 0 0 25px #0ef;*/
+    background-color: var(--color4_yt_background);
+    border-radius: 20px;
+}
+
+
+
+
+
+.wrapper .form-box{
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (max-width: 786px) {
+        width: 100%;
+    }
+}
+
+.form-box h2{
+    font-size: 32px;
+    color: #fff;
+    text-align: center;
+}
+
+.form-box .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 25px 0;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #fff;
+    transition: 0.5s;
+
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    padding-right: 23px;
+}
+
+.input-box input:focus{
+    border-bottom-color: #0ef;
+
+
+}
+
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: 0.5s;
+
+}
+
+
+.input-box input:focus~label,
+.input-box input:not(:placeholder-shown)~label
+{
+    top: -5px;
+    color: #0ef;
+
+}
+
+.input-box i {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #fff;
+    transition: 0.5s;
+
+}
+.input-box input:focus~i,
+.input-box input:valid i
+{
+    
+    color: #0ef;
+
+}
+
+
+.my-btn{
+    position: relative;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: 2px solid var(--gradient0);
+    
+
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    z-index: 1;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.my-btn::before{
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 300%;
+    background: var(--gradient0);
+
+    z-index: -1;
+    transition: 0.5s;
+}
+
+.my-btn:hover::before{
+    top: 0;
+}
+
+.form-box .forgot-pass-link,
+.form-box .resend-code-link,
+.form-box .resend-code-link1
+{
+    font-size: 14.5px;
+    color: #fff;
+    text-align: left;
+    margin: 20px 0 10px;
+
+}
+
+
+
+.form-box .logreg-link0,
+.form-box .logreg-link1,
+.form-box .logreg-link2,
+.form-box .logreg-link3,
+.form-box .logreg-link4,
+.form-box .logreg-link5
+{
+    font-size: 14.5px;
+    color: #fff;
+    text-align: center;
+    margin: 20px 0 10px;
+}
+
+.logreg-link0 p a,
+.logreg-link1 p a,
+.forgot-pass-link p a,
+.logreg-link2 p a, 
+.resend-code-link p a,
+.logreg-link3 p a,
+.logreg-link4 p a,
+.resend-code-link1 p a,
+.logreg-link5 p a
+{
+    color: #0ef;
+
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.logreg-link0 p a:hover,
+.logreg-link1 p a:hover,
+.forgot-pass-link p a:hover,
+.logreg-link2 p a:hover ,
+.resend-code-link p a:hover,
+.logreg-link3 p a:hover,
+.logreg-link4 p a:hover,
+.resend-code-link1 p a:hover,
+.logreg-link5 p a:hover
+{
+    text-decoration: underline;
+}
+
+
+.wrapper .info-text{
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/* onaj welcome back i lorem tekst podesavanja*/
+.wrapper .info-text.login{
+    right: 0;
+    text-align: right;
+    padding: 0 40px 60px 150px;
+   
+    
+}
+/* onaj welcome back i lorem tekst podesavanja*/
+.wrapper .info-text.register{
+    left: 0;
+    text-align: left;
+    padding: 0 150px 60px 40px;
+    pointer-events: none; /* da sign up reaguje na click jer je ovo ispod toga */
+
+   
+}
+
+.wrapper .info-text.login .animation{
+    transform: translateX(0);
+    transition: 0.7s ease;
+    opacity: 1;
+    filter: blur(0);
+    transition-delay: calc(.1s * var(--j));
+ 
+}  
+
+
+.wrapper.active .info-text.login .animation{
+     transform: translateX(150%);
+     transition-delay: calc(.1s * var(--i));
+     opacity: 0;
+     filter: blur(10px);
+     
+  
+}  
+
+.wrapper.active .info-text.login{
+    pointer-events: none; /* ja dodala*/
+}
+ 
+
+.wrapper.active .info-text.register{
+    pointer-events: auto;
+}
+
+.wrapper .info-text.register .animation{
+    transform: translateX(-120%);
+    transition: 0.7s ease;
+    opacity: 0;
+    filter: blur(10px);
+    transition-delay: calc(.1s * var(--j));
+
+
+}
+
+.wrapper.active .info-text.register .animation{
+    transform: translateX(0);
+    opacity:1;
+    filter: blur(0);
+    transition-delay: calc(.1s * var(--i));
+
+
+}
+
+.info-text h2{
+    font-size: 36px;
+    color: #fff;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+.info-text p {
+    font-size: 16px;
+    color: #fff;
+}
+
+
+
+.gender_choice {
+    font-size: 30px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.user_choice{
+    font-size: 20px;
+}
+
+
+
+.wrapper .bg-animate{
+    position: absolute;
+    top: -4px;
+    right: 0;
+    width: 920px;
+    height: 600px;
+    background: var(--gradient0);
+    border-bottom: 3px solid #0ef;
+    transform: rotate(10deg) skewY(40deg);
+
+    transform-origin: bottom right;
+    transition: 1.2s ease;
+    transition-delay: 1.6s;
+
+}
+
+.wrapper.active .bg-animate, 
+.wrapper.active1 .bg-animate,
+.wrapper.active2 .bg-animate,
+.wrapper.fp .bg-animate,
+.wrapper.fp1 .bg-animate
+{
+    transform: rotate(0deg) skewY(0deg);
+    transition-delay: 0.5s;
+
+}
+
+
+.wrapper .bg-animate2{
+    position: absolute;
+    top: 100%;
+    left: 250px;
+    width: 850px;
+    height: 850px;
+    background: #081b29;
+    border-top: 3px solid #0ef;
+
+    transform: rotate(0) skewY(0);
+    transform-origin: bottom left;
+    transition: 1.2s ease;
+    transition-delay: 0.5s;
+
+}
+
+
+.wrapper.active .bg-animate2, 
+.wrapper.active1 .bg-animate2,
+.wrapper.active2 .bg-animate2,
+.wrapper.fp .bg-animate2,
+.wrapper.fp1 .bg-animate2
+{
+    transform: rotate(-10deg) skewY(-45deg);
+    transition-delay: 1.1s;
+
+}
+
+/*----------------------------------------*/
+
+
+/* za formu */
+.wrapper .form-box.login{
+    left: 0;
+    padding: 0 60px 0 40px;
+    pointer-events: auto;/* ja dodala*/
+    
+    
+}
+
+.wrapper.active .form-box.login,
+.wrapper.active1 .form-box.login,
+.wrapper.active2 .form-box.login,
+.wrapper.fp .form-box.login,
+.wrapper.fp1 .form-box.login
+{
+    left: 0;
+    padding: 0 60px 0 40px;
+    pointer-events: none;/* ja dodala*/
+    
+    
+}
+
+/* za formu */
+.wrapper .form-box.register,
+.wrapper .form-box.register2 ,
+.wrapper .form-box.register3,
+.wrapper .form-box.fp-reg,
+.wrapper .form-box.fp-reg1,
+
+.wrapper.active .form-box.register2,
+.wrapper.active .form-box.register3, 
+.wrapper.active .form-box.fp-reg,
+.wrapper.active .form-box.fp-reg1,
+
+.wrapper.active1 .form-box.register,
+.wrapper.active1 .form-box.register3,
+.wrapper.active1 .form-box.fp-reg,
+.wrapper.active1 .form-box.fp-reg1,
+
+
+.wrapper.active2 .form-box.register,
+.wrapper.active2 .form-box.register2,
+.wrapper.active2 .form-box.fp-reg,
+.wrapper.active2 .form-box.fp-reg1,
+
+.wrapper.fp .form-box.register,
+.wrapper.fp .form-box.register2,
+.wrapper.fp .form-box.form-box.register3,
+.wrapper.fp .form-box.fp-reg1,
+
+.wrapper.fp1 .form-box.register,
+.wrapper.fp1 .form-box.register2,
+.wrapper.fp1 .form-box.register3,
+.wrapper.fp1 .form-box.fp-reg
+
+{
+    right: 0;
+    padding: 0 40px 0 60px;
+    pointer-events: none;
+    
+
+
+}
+
+
+.wrapper.active .form-box.register,
+
+.wrapper.active1 .form-box.register2,
+
+.wrapper.active2 .form-box.register3,
+
+.wrapper.fp .form-box.fp-reg,
+
+.wrapper.fp1 .form-box.fp-reg1
+{
+    right: 0;
+    padding: 0 40px 0 60px;
+    pointer-events: auto;
+}
+
+
+/*-----------------------------------*/ 
+
+
+/* kad se vraca login iz active u obican wrapper*/
+.wrapper .form-box.login .animation{
+   transform: translateX(0);
+   transition: 0.5s ease;
+   opacity: 1;
+   filter: blur(0);
+   transition-delay: calc(.1s * var(--j));
+
+}  
+
+/*----------------------*/
+
+/* za login kad ide levo kad dobije klasu active*/
+.wrapper.active .form-box.login .animation,
+
+.wrapper.active1 .form-box.login .animation,
+
+.wrapper.active2 .form-box.login .animation,
+
+.wrapper.fp .form-box.login .animation,
+
+.wrapper.fp1 .form-box.login .animation
+
+{
+    transform: translateX(-120%);
+    transition-delay: calc(.1s * var(--i));
+    opacity: 0;
+    filter: blur(10px);
+    pointer-events: none; /* ja dodala*/
+ 
+ }  
+
+
+
+
+/* sign in forma je prvo 120% izvan i onda sa vremenom od 0.7s uleti kao u ovu formu*/
+.wrapper .form-box.register .animation,
+.wrapper .form-box.register2 .animation,
+.wrapper .form-box.register3 .animation,
+.wrapper .form-box.fp-reg .animation,
+.wrapper .form-box.fp-reg1 .animation,
+
+.wrapper.active .form-box.register2 .animation,
+.wrapper.active .form-box.register3 .animation,
+.wrapper.active .form-box.fp-reg .animation,
+.wrapper.active .form-box.fp-reg1 .animation,
+
+.wrapper.active1 .form-box.register .animation,
+.wrapper.active1 .form-box.register3 .animation,
+.wrapper.active1 .form-box.fp-reg .animation,
+.wrapper.active1 .form-box.fp-reg1 .animation,
+
+.wrapper.active2 .form-box.register .animation,
+.wrapper.active2 .form-box.register2 .animation,
+.wrapper.active2 .form-box.fp-reg .animation,
+.wrapper.active2 .form-box.fp-reg1 .animation,
+
+.wrapper.fp .form-box.register .animation,
+.wrapper.fp .form-box.register2 .animation,
+.wrapper.fp .form-box.register3 .animation
+.wrapper.fp .form-box.fp-reg1 .animation,
+
+.wrapper.fp1 .form-box.register .animation,
+.wrapper.fp1 .form-box.register2 .animation,
+.wrapper.fp1 .form-box.register3 .animation,
+.wrapper.fp1 .form-box.fp .animation
+
+{
+    transform: translateX(120%);
+    transition: 0.5s ease;
+    opacity: 0;
+    filter: blur(10px);
+    transition-delay: calc(.1s * var(--j));
+
+
+}
+
+
+/* ovde se kao zada koja je krajnja pozicija gde stane posle tranzicije*/
+.wrapper.active .form-box.register .animation,
+
+.wrapper.active1 .form-box.register2 .animation,
+
+.wrapper.active2 .form-box.register3 .animation,
+
+.wrapper.fp .form-box.fp-reg .animation,
+
+.wrapper.fp1 .form-box.fp-reg1 .animation
+
+{
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition-delay: calc(0.1s * var(--i));
+ 
+}

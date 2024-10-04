@@ -1,0 +1,219 @@
+@import url("common.css");
+@import url("food-timeline.css");
+@import url("search-button.css");
+@import url("my-input.css");
+@import url("navbar.css");
+@import url("searching.css");
+@import url("login_pop_ups.css");
+
+:root {
+    --gradient: linear-gradient(90deg, #7500f6, #007dff, #00aaff, #00cae9, #0fe3be);
+    --font-color: white;
+}
+
+body {
+    overflow-x: hidden;
+}
+.checkbox-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.food-checkbox {
+    border-style: none;
+}
+.food-checkbox input[type="checkbox"]:checked {
+    background-color: #7500f6;
+    border: none;
+}
+.food-checkbox input[type="checkbox"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+food-item {
+    list-style-type: none;
+}
+.food-list {
+    list-style-type: none;
+    max-height: 400px;
+    overflow: auto;
+}
+.food-list::-webkit-scrollbar {
+    width: 10px;
+}
+.food-list::-webkit-scrollbar-thumb {
+    background-color: #4ab4f6;
+    border-radius: 12px;
+}
+.food-drag {
+    font-size: 68px;
+    cursor: pointer;
+}
+#days {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 0px 10px;
+}
+.day-button {
+    position: relative;
+    color: var(--font-color) !important;
+    width: 10.6%;
+    height: 10.6%;
+    font-weight: bold;
+    background-color: transparent;
+    vertical-align: middle;
+    aspect-ratio: 1 / 1;
+    border: none !important;
+    font-size: 2.15vw;
+    overflow: hidden;
+    background-image: var(--gradient);
+    background-size: 1000%;
+    background-position: 0%;
+    padding: 7px;
+    letter-spacing: 0.05em;
+    margin: 0.2% 0;
+
+    @media (max-width: 1100px) {
+        padding: 3px;
+    }
+
+    @media (max-width: 576px) {
+        width: 19%;
+        height: 19%;
+        margin: 0.5%;
+        background-size: 500%;
+        font-size: 4vw;
+    }
+}
+.day-button:hover {
+    transform: scale(1.05);
+}
+.day-button:focus,
+.day-button:active {
+}
+.search-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.search-item-left {
+    display: flex;
+    text-align: left;
+    align-items: center;
+    justify-content: flex-start;
+}
+.search-item-right {
+    display: flex;
+    text-align: right;
+    align-items: center;
+    justify-content: flex-end !important;
+}
+.food-drax-text {
+    font-size: 48px;
+}
+.food-drag-text {
+    font-size: 48px;
+}
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+body {
+    background-color: #f0f0f0;
+}
+#day-header {
+    font-size: 8vw;
+    font-weight: bold;
+    background-image: var(--gradient);
+    background-clip: text;
+    color: transparent;
+}
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+#save-begin-btn {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+
+    @media (max-width: 768px) {
+        width: 25%;
+    }
+}
+#trash-can {
+    width: 15%;
+
+    @media (max-width: 768px) {
+        width: 25%;
+    }
+}
+#save-begin-btn button {
+    width: 100% !important;
+}
+.my-section {
+    background-color: white !important;
+    width: 100%;
+}
+#search-food-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#form-parent-div {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    margin: 0px 10px;
+}
+#food-amount {
+    margin-top: 20px;
+    width: 100%;
+    border-color: #7500f6 !important;
+    outline-color: #7500f6 !important;
+}
+#food-amount input[type="number"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.food-collapse-button {
+    width: 100%;
+    display: flex;
+    border: none !important;
+}
+.plan-tag-name {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+
+}
+.plan-name input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 35px;
+}
+.plan-tags {
+    display: flex;
+    gap: 3px;
+
+}
+.my-btn-check:checked {
+    background-color: grey !important;
+}
+.my-list-group input[type="checkbox"] {
+    border-color: #6f42c1;
+}
+

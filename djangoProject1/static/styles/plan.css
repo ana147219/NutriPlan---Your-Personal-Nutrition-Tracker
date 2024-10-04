@@ -1,0 +1,12 @@
+@import url("calendar.css");
+@import url("food-timeline.css");
+@import url("common.css");
+@import url("progress-bars.css");
+@import url("navbar.css");
+@import url("form_popup.css");
+@import url("login_pop_ups.css");
+
+body {
+    background-color: #f0f0f0;
+}
+  

@@ -1,0 +1,29 @@
+.search-bar {
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #ffffff;
+}
+
+.search-bar-div {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    margin-left: 0;
+}
+#input-search {
+    width: 80%;
+}
+
+#button-search-div {
+    width: 10%;
+}
+.sort-part {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+

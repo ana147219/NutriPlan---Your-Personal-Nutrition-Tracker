@@ -1,0 +1,20 @@
+:root {
+    --gradient : linear-gradient(90deg, #7500f6, #007dff, #00aaff, #00cae9, #0fe3be);
+    --font-color : white;
+}
+
+.search-button {
+    background-image: var(--gradient);
+    background-size: 200%;
+    background-position: 0%;
+    border: none;
+    margin-left: -25px !important;
+    color: var(--font-color) !important;
+    transition: background-position 1s;
+}
+
+.search-button:active,
+.search-button:hover {
+    background-position: 50%;
+    border: none;
+}

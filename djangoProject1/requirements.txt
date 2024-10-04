@@ -1,0 +1,7 @@
+Django
+psycopg2-binary
+dj-database-url
+mysqlclient
+pillow
+django-extensions
+selenium

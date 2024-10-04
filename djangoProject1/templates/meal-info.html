@@ -1,0 +1,81 @@
+{% load static %}
+<img src="{{ img }}" alt="" id="food-image" />
+<h1 id="food-name" style="margin-bottom: 25px; text-align: center">{{ name }}</h1>
+<h5>Amount: {{ amount }}</h5>
+<h5>Energy: {{ calories|floatformat }}kcal</h5>
+<div class="fcp-content">
+    <div style="text-align: left">Protein</div>
+    <div style="text-align: right">{{ protein_amount|floatformat }}g</div>
+</div>
+<div class="progress nutri-progress" style="background-color: #ffc2b3">
+    <div
+        id="protein-progress"
+        class="progress-bar meal-proggress-animation"
+        role="progressbar"
+        style="width: {{ protein }}%; background-color: red"
+        aria-valuenow="{{ protein }}"
+        aria-valuemin="0"
+        aria-valuemax="100">
+    </div>
+</div>
+<div class="fcp-content">
+    <div style="text-align: left">Fat</div>
+    <div style="text-align: right">{{ fat_amount|floatformat }}g</div>
+</div>
+<div class="progress nutri-progress" style="background-color: #ffdbb3">
+    <div
+        id="fat-progress"
+        class="progress-bar meal-proggress-animation"
+        role="progressbar"
+        style="width: {{ fat }}%; background-color: #ff8700"
+        aria-valuenow="{{ fat }}"
+        aria-valuemin="0"
+        aria-valuemax="100">
+    </div>
+</div>
+<div class="fcp-content">
+    <div style="text-align: left">Carbs</div>
+    <div style="text-align: right">{{ carbs_amount|floatformat }}g</div>
+</div>
+<div class="progress nutri-progress" style="background-color: #b3ffdf">
+    <div
+        id="carbs-progress"
+        class="progress-bar meal-proggress-animation"
+        role="progressbar"
+        style="width: {{ carbs }}%; background-color: #0aff99"
+        aria-valuenow="{{ carbs }}"
+        aria-valuemin="0"
+        aria-valuemax="100">
+    </div>
+</div>
+<div class="fcp-content">
+    <div style="text-align: left">Fiber</div>
+    <div style="text-align: right">{{ fiber_amount|floatformat }}g</div>
+</div>
+<div class="progress nutri-progress" style="background-color: #b3faff">
+    <div
+        id="carbs-progress"
+        class="progress-bar meal-proggress-animation"
+        role="progressbar"
+        style="width: {{ fiber }}%; background-color: #0aefff"
+        aria-valuenow="{{ fiber }}"
+        aria-valuemin="0"
+        aria-valuemax="100">
+    </div>
+</div>
+<div class="fcp-content">
+    <div style="text-align: left">Sugar</div>
+    <div style="text-align: right">{{ sugar|floatformat }}g</div>
+</div>
+<div class="progress nutri-progress" style="background-color: #ebb3ff">
+    <div
+        id="carbs-progress"
+        class="progress-bar meal-proggress-animation"
+        role="progressbar"
+        style="width: {{ sugar }}%; background-color: #be0aff"
+        aria-valuenow="{{ sugar }}"
+        aria-valuemin="0"
+        aria-valuemax="100">
+    </div>
+</div>
+<button id="change-meal-button" class="my-btn btn-green" type="button" name="{{ id }}">Meal finished</button>

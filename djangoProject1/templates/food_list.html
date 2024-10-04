@@ -1,0 +1,40 @@
+{% load static %}
+{% if num_of_food == 0 %}
+    <li>
+        <div class="search-item">
+            <span class="food-drag-text w-100 text-center">Nothing Found</span>
+        </div>
+    </li>
+{% else %}
+    {% for food in foods %}
+
+    <li>
+         <button class="btn collapsed food-collapse-button" data-bs-toggle="collapse"
+                data-bs-target="#food-{{ food.id }}" aria-expanded="false" name="{{ food.id }}">
+            <div class="search-item">
+                <div class="search-item-left">
+                    <img src="{% get_media_prefix %}{{ food.food_picture }}" draggable="true" ondragstart="drag(event)">
+                    <span class="food-drag-text">{{ food.name }}</span>
+                </div>
+                <div class="search-item-right">
+                    <div class="input-group">
+                        <input type="number" class="form-control" placeholder="Food amount" value="100"/>
+                        <span class="input-group-text">{{ food.unit }}</span>
+                    </div>
+                </div>
+            </div>
+        </button>
+        <div id="food-{{ food.id }}" class="collapse">
+            <p>
+                Calories: {{ food.calories }}
+                Protein: {{ food.protein }}
+                Fiber: {{ food.fiber }}
+                Fat: {{ food.fat }}
+                Carbs: {{ food.carbs }}
+                Sugar: {{ food.sugar }}
+            </p>
+        </div>
+    </li>
+
+    {% endfor %}
+{% endif %}

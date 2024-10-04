@@ -1,0 +1,124 @@
+{% extends 'log-user-template.html' %}
+
+{% block title %}
+    Calendar
+{% endblock %}
+
+{% block includes_header %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    {{ progress|json_script:"myData" }}
+    {% load static %}
+    <link href="{% static 'styles/plan.css' %}" rel="stylesheet"/>
+    <script type="module" src="{% static 'scripts/plan.js' %}"></script>
+
+{% endblock %}
+
+{% block pop_up %}
+    <div class="alert hide warning-col" id="alert">
+        <i class="bx my-bx bxs-error-circle"></i>
+        <span class="msg">WARNING: It is not time for this meal now</span>
+        <div class="close-btn">
+            <i class="bx bx-x"></i>
+        </div>
+    </div>
+{% endblock %}
+
+{% block section %}
+
+    <div class="modal__container" id="modal-container">
+        <div class="modal__content">
+            <div class="modal__close close-modal" title="Close">
+                <i class="bx bx-x"></i>
+            </div>
+            <br>
+            <br>
+            <div class="make_plan_public">
+                <p>Are you sure u want to give up?</p>
+            </div>
+            <br/>
+
+            <div class="modal_confirm_btns">
+                <form action="/give-up" method="post">
+                    {% csrf_token %}
+                    <button class="modal__button-link send-form btn bg-success" type="submit">Yes</button>
+                </form>
+
+                <button class="modal__button-link close-modal btn bg-danger">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-9" id="first-column">
+            <div class="basic-container" id="calendar-div">
+                <div id="myCarousel" class="carousel slide summary-carousel-pager" data-ride="carousel"
+                     data-interval="false">
+                    <div class="carousel-inner" id="calendar">
+                        <div class="carousel-item">
+                            <div id="calendar0"></div>
+                        </div>
+                        <div class="carousel-item active">
+                            <div id="calendar1"></div>
+                        </div>
+                        <div class="carousel-item">
+                            <div id="calendar2"></div>
+                        </div>
+                    </div>
+                    <a
+                            id="btn-left"
+                            class="carousel-control-prev font-weight-bold"
+                            href="#myCarousel"
+                            role="button"
+                            data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </a>
+                    <a
+                            id="btn-right"
+                            class="carousel-control-next font-weight-bold"
+                            href="#myCarousel"
+                            role="button"
+                            data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="basic-container timeline-container" id="timeline-div">
+                <button id="left-button" class="timeline-button">&#10094;</button>
+                <div class="food-timeline" id="timeline" style="overflow: hidden">
+                    {% include "food-timeline-template.html" %}
+                </div>
+                <button id="right-button" class="timeline-button">&#10095;</button>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-3" id="second-column">
+            <div class="basic-container" id="progress-div">
+                <h1>
+                    {% if user.following_plan %}
+                        {{ user.following_plan.name }}
+                    {% else %}
+                        Unknown
+                    {% endif %}
+                </h1>
+                <div class="wrapper-circle-progress">
+                    <div class="card">
+                        <div class="circle">
+                            <div class="bar"></div>
+                            <div class="box"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="my-btn btn-green" id="give-up-button" style="width: 70%">Give Up</button>
+            </div>
+            <div class="basic-container" id="meal-div">
+
+            </div>
+            <div class="d-grid gap-2"></div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

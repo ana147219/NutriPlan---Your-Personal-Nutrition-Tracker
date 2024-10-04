@@ -1,0 +1,249 @@
+@import url("common.css");
+@import url("progress-bars.css");
+@import url("toggle-slider.css");
+@import url("form_popup.css");
+@import url("navbar.css");
+@import url("plan-list.css");
+@import url("login_pop_ups.css");
+
+:root {
+    --color1: #e67e22;
+    --color2: #28b463;
+    --color3: #f1c40f;
+    --color4_yt_background: #081b29;
+    --color5: #e74c3c;
+    --blackish: #17202a;
+    --color6: #2e86c1;
+    --color7: #ff9900;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+@keyframes fillProgress {
+    from {
+        width: 0%;
+    }
+}
+
+.plans-div {
+    width: 90%;
+}
+
+.animation {
+    animation: fillProgress 2s ease forwards;
+}
+
+.progress_div {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.food-values {
+    width: 75%;
+}
+
+.food-values h6 {
+    width: 25%;
+}
+
+.horizontal-progress {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 576px ) {
+    
+    .progress_div {
+        flex-direction: column;
+    }
+
+    .food-values {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .food-values h6 {
+        width: 30%;
+    }
+
+}
+.image-text-cont {
+    display: flex;
+    flex-direction: row;
+    height: 110px;
+}
+
+.content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #ffffff;
+}
+.save_btn {
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    color: white;
+    border-radius: 10px;
+}
+.my-card-lay {
+    height: 100%;
+}
+.change-form {
+    min-height: 250px;
+    display: flex;
+}
+.change-height {
+    height: 70px;
+}
+.role-change {
+    padding: 20px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
+    align-items: center;
+}
+.noti-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #00cae9;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 5px;
+}
+.noti-header-text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 15px;
+}
+.bell-icon {
+    font-size: 50px;
+    color: yellow;
+}
+.noti-button {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0px;
+    border: none !important;
+    border-bottom: 1px solid lightgray !important;
+    border-radius: 0px;
+}
+.noti-button:hover {
+  background-color: #00000013;
+}
+
+.noti-username {
+    color: lightgray;
+}
+.profile-image {
+    width: 100%;
+    height: auto;
+}
+.noti-button-u-content {
+    text-align: left;
+    padding: 0px 5px;
+}
+.noti-button-d-content {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: left;
+}
+.noti-button-img {
+    width: 75%;
+    height: auto;
+    border-radius: 100%;
+}
+.noti-info-div {
+    width: 100%;
+}
+.noti-info-text {
+    font-size: 12px;
+    text-align: justify;
+}
+.noti-info-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.noti-info-buttons button {
+    font-size: 0.7cqi;
+    
+    @media screen and (max-width: 992px) {
+        font-size: 1.5cqi;
+    }
+}
+.noti-reminder-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.noti-reminder-info img {
+    width: 20%;
+    height: auto;
+}
+
+/* columns not so wide */
+
+
+
+.col2{
+    width: 40%;
+}
+
+.col1{
+    margin-left: 5%;
+}
+
+.col3{
+    margin-right: 5%;
+}
+
+.plan-link:link,
+.plan-link:visited,
+.plan-link:hover,
+.plan-link:active {
+    color: black !important;
+    text-decoration: none;
+}
+
+
+.plan-link:link,
+.plan-link:visited,
+.plan-link:hover,
+.plan-link:active {
+    color: black !important;
+    text-decoration: none;
+}
+
+.plan-badges {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    text-align: right;
+    gap: 4px;
+}
+
+#notifications-div {
+    max-height: 500px;
+    overflow: auto;
+}
+#notifications-div::-webkit-scrollbar {
+    width: 10px;
+}
+#notifications-div::-webkit-scrollbar-thumb {
+    background-color: #4ab4f6;
+    border-radius: 12px;
+}

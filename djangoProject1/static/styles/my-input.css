@@ -1,0 +1,150 @@
+:root {
+    --color1: linear-gradient(90deg, #7500f6, #007dff, #00aaff, #00cae9, #0fe3be);
+    --color2: #00b69a;
+    --color3: #f1c40f;
+    --color4_yt_background: #081b29;
+    --color5: #e74c3c;
+    --blackish: #17202a;
+    --normal-color: black;
+}
+
+.form-box.login {
+    padding: 0 0px;
+    width: 90%;
+}
+
+.form-box.login .animation {
+    transform: translateX(0);
+    transition: 0.7s ease;
+    left: 0px;
+}
+
+.active .form-box.login .animation {
+    transform: translateX(-120%);
+}
+
+.form-box.register {
+    right: 0;
+    padding: 0 40px 0 60px;
+    display: none;
+}
+
+.form-box {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-box .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 25px 0;
+}
+
+.input-box input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--normal-color);
+    transition: 0.5s;
+    font-size: 16px;
+    color: var(--normal-color);
+    font-weight: 500;
+    padding-right: 0px;
+}
+
+.input-box input:focus {
+    border-image: var(--color1) 1;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%) ;
+    font-size: 16px;
+    color: var(--normal-color);
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:not(:placeholder-shown)~label {
+    top: -5px;
+    background-image: var(--color1);
+    background-clip: text;
+    color: transparent;
+}
+
+.input-box i {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--normal-color);
+    transition: 0.5s;
+}
+
+.input-box input:focus ~ i,
+.input-box input:valid i {
+    background-image: var(--color1);
+    background-clip: text;
+    color: transparent;
+}
+.parent-div {
+    position: relative;
+}
+
+
+.upload{
+  width: 190px;
+  position: relative;
+  margin: auto;
+    margin-bottom: 30px;
+    margin-top: 30px;
+
+}
+
+.upload img{
+  border-radius: 50%;
+  border: 6px solid #c0f8f0;
+}
+
+.upload .round{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #00B4FF;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.upload .round input[type = "file"]{
+  position: absolute;
+  transform: scale(2);
+  opacity: 0;
+}
+
+input[type=file]::-webkit-file-upload-button{
+    cursor: pointer;
+}
+
+
+
+
+
+
+

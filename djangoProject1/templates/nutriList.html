@@ -1,0 +1,45 @@
+<!-- Ana Vitkovic 0285/2021 -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/search-nutri.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/search_plan.css' %}" />
+<link rel="stylesheet" href="{% static 'styles/scroll.css' %}" />
+
+
+{% if empty == 0 %}
+    <h2 class="text-center mt-5">Nothing Found</h2>
+{% else %}
+    
+    <div class="comments-wrp_modif" style="height: 550px">
+    {% for nutri in nutris %}
+        
+        <a href="preview_nutri?nutri_id={{ nutri.id }}" class="plan-link" style="margin-left: 2%; margin-right: 2%">
+         <div class="basic-container whole-plan search-user-container">
+            {% load static %}
+             <img src="{% get_media_prefix %}{{ nutri.profile_picture }}" width="110px" height="110px" style="border-radius: 50%" />
+             <div class="img-text">
+                 
+                 <h1>{{ nutri.username }}</h1>
+
+                 {% if nutri.avg_score is None %}
+                     {% for _ in "xxxxx" %}
+                        <label title="text" class="no-star">★</label>
+                     {% endfor %}
+                 {% else %}    
+                     {% for _ in "x"|ljust:nutri.avg_score %}
+                          <label title="text" class="star">★</label>
+                     {% endfor %}
+                     {% if nutri.score_diff == 0 %}
+                     {% else %}
+                         {% for _ in "x"|ljust:nutri.score_diff %}
+                            <label title="text" class="no-star">★</label>
+                         {% endfor %}
+                     {% endif %}
+                 {% endif %}
+             </div>                            
+         </div>        
+        </a>
+
+    {% endfor %}    
+    </div>
+
+{% endif %}

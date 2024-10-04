@@ -1,0 +1,49 @@
+
+
+
+.comments-wrp_modif::-webkit-scrollbar {
+    width: 10px;
+}
+
+.comments-wrp_modif::-webkit-scrollbar-thumb {
+    background-color: #4ab4f6;
+
+    border-radius: 12px;
+
+}
+.comments-wrp_modif {
+    display: flex;
+    flex-direction: column;
+
+    height: 75%;
+
+    overflow: auto;
+
+    padding: 20px;
+
+    height: 470px;
+}
+
+
+.cwm-basic-container {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 10px;
+    box-shadow: 1px 1px 4px 0px #808080;
+
+}
+
+.cwm-basic-containerplans {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 10px;
+    margin-left: 2%;
+
+}
+
+
+

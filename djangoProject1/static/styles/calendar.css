@@ -1,0 +1,163 @@
+:root {
+    --my-green: #4dff4d;
+    --my-blue: #4dffff;
+}
+
+.summary-carousel-pager {
+    width: 100%;
+    
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    top: 20px;
+    bottom: auto;
+}
+.carousel-control {
+    align-self: flex-start;
+}
+
+#calendar {
+    background-image: linear-gradient(180deg, #4dff4d, #00ff8f, #00ffc2, #00ffe7, #4dffff);
+    text-align: center;
+    border-radius: 10px;
+    animation: gradient 10s ease infinite alternate;
+    background-size: 150% 150%;
+}
+@keyframes gradient {
+	0% {
+		background-position: top;
+	}
+	100% {
+		background-position: bottom;
+	}
+}
+
+ul {
+    list-style-type: none;
+}
+
+.month {
+    padding: 5px 25px;
+    width: 100%;
+    text-align: center;
+    background-color: #000000;
+}
+
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background-color: #000000;
+}
+
+.month .prev {
+    float: left;
+    padding-top: 10px;
+}
+
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+.weekdays {
+    margin: 0;
+    text-align: left;
+    padding: 10px 0;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    font-size: 35px;
+    transition: background-color 0.3s ease;
+}
+
+.weekdays li:hover {
+    background-color: #0000001a;
+}
+
+.days {
+    padding: 10px 0;
+    margin: 0;
+    text-align: left;
+    height: 320px;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin: 7px 0px;
+    font-size: 23px;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.days li:hover {
+    background-color: #0000001a;
+}
+
+.days li .active {
+    padding: 5px;
+    color: rgb(189, 38, 189) !important;
+    border: 2px solid rgb(189, 38, 189);
+    /*border-radius: 100%; */
+}
+
+@media screen and (max-width: 720px) {
+    .weekdays li {
+        font-size: 28px;
+    }
+
+    .days li {
+        font-size: 20px;
+    }
+
+    .days {
+        height: 280px;
+    }
+    
+}
+
+@media screen and (max-width: 420px) {
+    .weekdays li {
+        font-size: 25px;
+    }
+
+    .days li .active {
+        padding: 2px;
+    }
+
+    .days li {
+        font-size: 17px;
+    }
+
+    .days {
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 290px) {
+    .weekdays li {
+        font-size: 22px;
+    }
+
+    .days li {
+        font-size: 15px;
+    }
+
+    .days {
+        height: 250px;
+    }
+}

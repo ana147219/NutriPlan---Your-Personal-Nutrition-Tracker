@@ -1,0 +1,4 @@
+migrations/*
+__pycache__/*
+my_models/__pycache__/*
+my_views/__pycache__/*

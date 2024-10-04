@@ -1,0 +1,38 @@
+@import url("common.css");
+@import url("search-button.css");
+@import url("my-input.css");
+@import url("searching.css");
+@import url("navbar.css");
+
+body {
+    background-color: #f0f0f0;
+}
+
+.no-star {
+    color: #ccc;
+    font-size: 30px;
+}
+
+.star {
+    color: #fffb00;
+    font-size: 30px;
+}
+
+.img-text {
+    text-align: left;
+    width: 80%;
+    padding-left: 20px;
+}
+
+.user-img {
+    height: 100px;
+}
+
+.search-user-container {
+    display: flex;
+    flex-direction: row !important;
+}
+
+#input-search .mb-3 .parent-div{
+    width: 80% !important;
+}

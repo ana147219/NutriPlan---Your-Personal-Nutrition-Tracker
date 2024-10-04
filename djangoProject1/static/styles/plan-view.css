@@ -1,0 +1,16 @@
+@import url("common.css");
+@import url("star-rating.css");
+@import url("comments.css");
+@import url("my-input.css");
+@import url("navbar.css");
+@import url("login_pop_ups.css");
+
+body {
+    background-color: #f0f0f0;
+}
+
+
+.col-sm-4{
+    margin-left: 25%;
+}
+

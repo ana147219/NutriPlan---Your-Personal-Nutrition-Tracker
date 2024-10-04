@@ -1,0 +1,120 @@
+<!-- Ana Vitkovic 0285/2021 -->
+{% extends "log-user-template.html" %}
+
+{% block title %}
+    Plan View
+{% endblock %}
+
+{% block includes_header %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/plan-view.css' %}"/>
+    <script src="{% static "scripts/commenting.js" %}"></script>
+    <script src="{% static "scripts/collapse_rating.js" %}"></script>
+{% endblock %}
+
+{% block pop_up %}
+    <div class="alert hide" id="alert">
+        <i class="bx my-bx"></i>
+        <span class="msg"></span>
+        <div class="close-btn">
+            <i class="bx bx-x"></i>
+        </div>
+    </div>
+{% endblock %}
+
+{% block section %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-4">
+                <div class="basic-container">
+                    {% load static %}
+                    <img src="{% get_media_prefix %}icons8-list-view-96.png" width="60%"/>
+                    <h2 class="ps-2" style="text-align: center">{{ plan.name }}</h2>
+
+                    <div class="rating_score" id="averageRating">
+                        <span class="fa fa-star fa2x display_star"> </span>
+                        {{ averageScore }} / 5
+                    </div>
+
+                    <p>
+                        <button
+                                class="bu-primary"
+                                id="rate_btn"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseWidthExample"
+                                aria-expanded="false"
+                                aria-controls="collapseWidthExample">
+                            Rate
+                        </button>
+                    </p>
+                    <div>
+                        <div class="collapse" id="collapseWidthExample">
+                            <div class="card card-body my-collapse">
+                                <h3>My Rating</h3>
+                                <div class="div_starts">
+                                    <div class="stars">
+                                        <input type="radio" id="five" name="rate" value="5"/>
+                                        <label for="five"></label>
+                                        <input type="radio" id="four" name="rate" value="4"/>
+                                        <label for="four"></label>
+                                        <input type="radio" id="three" name="rate" value="3"/>
+                                        <label for="three"></label>
+                                        <input type="radio" id="two" name="rate" value="2"/>
+                                        <label for="two"></label>
+                                        <input type="radio" id="one" name="rate" value="1"/>
+                                        <label for="one"></label>
+                                        <span class="result"></span>
+                                    </div>
+                                </div>
+                                <center>
+                                    <div>
+                                        <button class="bu-primary" id="submit_rate_btn_plan">Submit Rate</button>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button id="download_plan_btn" class="btn bu-primary w-50"><i class="bx bx-down-arrow-alt"
+                                                                                  style="font-size: 40px"></i></button>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-8">
+                <div>
+                    <div class="wrapper-com">
+                        <div class="reply-input">
+                            {% load static %}
+                            <img src="{% get_media_prefix %}{{ user_pic }}"
+                                 style="width: 70px !important; height: 70px !important;" alt="" class="usr-img"/>
+                            <textarea class="cmnt-input" placeholder="Add a comment..."></textarea>
+
+                            <button class="bu-primary comment-button" onclick="add_com_p()">SEND</button>
+                        </div>
+
+                        <div class="comments-wrp">
+
+                            {% for comment in comments %}
+                                <div class="comment-wrapper sb2">
+                                    <div class="c-user"><img class="usr-img" src="
+                                            {% get_media_prefix %}{{ comment.user.profile_picture }} "><span
+                                            class="usr-name">{{ comment.user.username }}</span></div>
+                                    <p class="c-text">{{ comment.text }}</p></div>
+
+                            {% endfor %}
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
